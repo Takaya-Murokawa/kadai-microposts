@@ -22,3 +22,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::get('/', function () {
     return view('welcome');
 });
+// ログインした人だけに見せる
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+});
