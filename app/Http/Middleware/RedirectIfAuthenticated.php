@@ -16,10 +16,19 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
+    // public function handle($request, Closure $next, $guard = null)
+    // {
+    //     // ログインチェック
+    //     if (Auth::guard($guard)->check()) { 
+    //           //ログイン済みの場合はHOMEにリダイレクト
+    //         return redirect(RouteServiceProvider::HOME);　
+    //     }
+    //     return $next($request);
+    // }
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) { //ログインチェック
-            return redirect(RouteServiceProvider::HOME);　//ログイン済みの場合はHOMEにリダイレクト
+        if (Auth::guard($guard)->check()) {
+            return redirect(RouteServiceProvider::HOME);
         }
 
         return $next($request);
