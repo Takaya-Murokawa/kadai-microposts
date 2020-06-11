@@ -23,6 +23,13 @@ Route::get('/', 'MicropostsController@index');
 
 // ログインした人だけに見せる
 Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'users/{id}'], function () {
+        Route::post('follow', 'UserFollowController@store')->name('user.follow');//フォローする
+        Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');//フォローを外す
+        Route::get('followings', 'UsersController@followings')->name('users.followings');//フォローしているユーザー表示
+        Route::get('followers', 'UsersController@followers')->name('users.followers');//フォロワー表示
+    });
+    
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
     Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });
