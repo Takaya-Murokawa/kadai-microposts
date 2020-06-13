@@ -28,8 +28,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');//フォローを外す
         Route::get('followings', 'UsersController@followings')->name('users.followings');//フォローしているユーザー表示
         Route::get('followers', 'UsersController@followers')->name('users.followers');//フォロワー表示
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');    // ファボの一覧表示
     });
     
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    
+    
+    Route::group(['prefix' => 'microposts/{id}'], function () {
+        Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
+        Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
+    });
     Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });

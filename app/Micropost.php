@@ -16,4 +16,12 @@ class Micropost extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+       //投稿をファボしたユーザ    主語を意識
+    public function favorites_users()
+    {
+        return $this->belongsToMany(User::class, 'favorites','mucropost_id','user_id')->withTimestamps();
+    }
+    
+    
 }

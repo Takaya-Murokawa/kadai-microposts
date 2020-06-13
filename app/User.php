@@ -43,14 +43,14 @@ class User extends Authenticatable
         return $this->hasMany(Micropost::class);
     }
     
-    /**
-     * このユーザがフォロー中のユーザ。（ Userモデルとの関係を定義）
-     */
+    
     
     
    
     
-    
+    /**
+     * このユーザがフォロー中のユーザ。（ Userモデルとの関係を定義）
+     */
     public function followings()
     {
         return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'follow_id')->withTimestamps();
@@ -140,12 +140,73 @@ class User extends Authenticatable
     }
     
     
+    
+    //ファボ関連
+    //ユーザーがファボした投稿
+    public function favorites()
+    {
+        return $this->belongsToMany(Micropost::class, 'favorites','user_id','micropost_id')->withTimestamps();
+    }
+    
+    
+    /**
+     * $micropostIdで指定された投稿をファボする。
+     *
+     * @param  int  $userId
+     * @return bool
+     */
+    public function favorite($micropostId)
+    {
+        // すでにファボしているかの確認
+        $exist = $this->is_favorite($micropostId);
+        // // 相手が自分自身かどうかの確認
+        // $its_me = $this->id == $micropostId;
+
+        if ($exist ) {
+            // すでにファボしていれば何もしない
+            return false;
+        } else {
+            // 未ファボであればファボする
+            $this->favorites()->attach($micropostId);
+            return true;
+        }
+    }
+    
+    public function unfavorite($micropostId)
+    {
+        // すでにファボしているかの確認
+        $exist = $this->is_favorite($micropostId);
+        // // 相手が自分自身かどうかの確認
+        // $its_me = $this->id == $micropostId;
+
+        if ($exist) {
+            // すでにファボしていればファボを外す
+            $this->favorites()->detach($micropostId);
+            return true;
+     
+        } else {
+            // 未ファボであれば何もしない
+            
+            return false;
+        }
+    }    
+    
+    
+    
+    public function is_favorite($micropostId)
+    {
+        // ファボ中micropostの中に $micropost_Idのものが存在するか
+        return $this->favorites()->where('micropost_id', $micropostId)->exists();
+    }
+    
+    
     /**
      * このユーザに関係するモデルの件数をロードする。
      */
     public function loadRelationshipCounts()
     {
-        $this->loadCount(['microposts', 'followings', 'followers']);
+        $this->loadCount(['microposts', 'followings', 'followers','favorites']);
+        // $this->loadCount(['microposts', 'followings', 'followers']);
     }
     
 

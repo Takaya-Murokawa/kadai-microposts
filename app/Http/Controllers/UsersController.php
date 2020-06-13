@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User; // 追加
 
+use App\Micropost;
+
 class UsersController extends Controller
 {
     //
@@ -88,6 +90,25 @@ class UsersController extends Controller
         return view('users.followers', [
             'user' => $user,
             'users' => $followers,
+        ]);
+    }
+    
+    public function favorites($id){
+        $user = User::findOrFail($id);//自分のユーザIdかも？
+        
+        $microposts = User::findOrFail($id);//一覧所得なのでUserでおk
+         
+         // 関係するモデルの件数をロード
+        $microposts->loadRelationshipCounts();
+        
+        // ユーザのファボー一覧を取得
+        $favorite = $microposts->favorites()->paginate(10);
+        
+        // ファボ一覧ビューでそれらを表示
+        return view('users.favorites', [
+            'user' => $user,
+            'micropost' => $microposts,
+            'microposts' => $favorite,
         ]);
     }
 }

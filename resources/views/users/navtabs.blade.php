@@ -13,6 +13,7 @@
             <span class="badge badge-secondary">{{ $user->followings_count }}</span>
         </a>
     </li>
+    
     {{-- フォロワー一覧タブ --}}
     <li class="nav-item">
         <a href="{{ route('users.followers', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.followers') ? 'active' : '' }}">
@@ -20,4 +21,15 @@
             <span class="badge badge-secondary">{{ $user->followers_count }}</span>
         </a>
     </li>
+    
+    {{-- ファボ一覧タブ --}}
+    
+    <li class="nav-item">
+        <!--['id' => $user->id] idで指定したuserを指定-->
+        <a href="{{ route('users.favorites', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.favorites') ? 'active' : '' }}">
+            Favorites
+            <span class="badge badge-secondary">{{ $user->favorites_count }}</span>
+        </a>
+    </li>
+    
 </ul>
