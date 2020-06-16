@@ -6,7 +6,8 @@
         {!! Form::close() !!}
     @else
         {{-- ファボ-ボタンのフォーム --}}
-        {!! Form::open(['route' => ['favorites.favorite', $micropost->id],'method' => 'post']) !!}
+        {!! Form::open(['route' => ['favorites.favorite', $micropost->id]]) !!}
+        <!--,'method' => 'post'-->
             {!! Form::submit('Favorite', ['class' => "btn btn-success btn-sm"]) !!}
         {!! Form::close() !!}
     @endif

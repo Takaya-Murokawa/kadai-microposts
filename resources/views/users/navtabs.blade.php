@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs nav-justified mb-3">
     {{-- ユーザ詳細タブ --}}
     <li class="nav-item">
-        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.show') ? 'active' : '' }}">
+        <a href="{{ route('users.show', ['user' => $user->id,'id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.show') ? 'active' : '' }}">
             TimeLine
-            <span class="badge badge-secondary">{{ $user->microposts_count }}</span>
+            <span class="badge badge-secondary">{{ $user->microposts_count + $user->favorites_count}}</span>
         </a>
     </li>
     {{-- フォロー一覧タブ --}}
@@ -28,7 +28,7 @@
         <!--['id' => $user->id] idで指定したuserを指定-->
         <a href="{{ route('users.favorites', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.favorites') ? 'active' : '' }}">
             Favorites
-        <span class="badge badge-secondary">{{ $user->favorites_count }}</span>
+            <span class="badge badge-secondary">{{ $user->favorites_count }}</span>
         </a>
     </li>
     
