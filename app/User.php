@@ -203,6 +203,18 @@ class User extends Authenticatable
     /**
      * このユーザに関係するモデルの件数をロードする。
      */
+     
+    public function timeline()
+    {
+        // このユーザがファボしたユーザのfavoidを取得して配列にする
+        $micropostIds = $this->favorites()->pluck('microposts.id')->toArray();
+        // このユーザのidもその配列に追加
+        $micropostIds[] = $this->id;
+        // それらのユーザが所有する投稿に絞り込む
+        return Micropost::whereIn('user_id', $micropostIds);
+    }
+     
+    
     public function loadRelationshipCounts()
     {
         $this->loadCount(['microposts', 'followings', 'followers','favorites']);

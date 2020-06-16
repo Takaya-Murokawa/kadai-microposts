@@ -24,4 +24,6 @@ class Micropost extends Model
     }
     
     
+    
+    
 }

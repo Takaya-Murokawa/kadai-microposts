@@ -25,19 +25,25 @@ class UsersController extends Controller
     
      public function show($id)
     {
-        // idの値でユーザを検索して取得
+        // idの値でユーザを検索して取得 自分の
         $user = User::findOrFail($id);
         
         // 関係するモデルの件数をロード
         $user->loadRelationshipCounts();
+        // print($user);
 
         // ユーザの投稿一覧を作成日時の降順で取得
-        $microposts = $user->microposts()->orderBy('created_at', 'desc')->paginate(10);
+        $microposts = $user->timeline()->orderBy('created_at', 'desc')->paginate(10);
+        // orderBy('created_at', 'desc')
         
-        $favorites = $user->favorites()->orderBy('created_at', 'desc')->paginate(10);
+        // $favorites = $user->favorites()->paginate(10);
+        // $microposts = array_merge_recursive($microposts,$favorites);
         
         
-        // $timeline = array_merge_recursive($microposts, $favorites);
+        // print(is_object($microposts));
+         
+        
+        // $timeline = array_merge($microposts, $favorites);
         
         // $timeline = $timeline->orderBy('created_at', 'desc')->paginate(10);
         
@@ -51,7 +57,7 @@ class UsersController extends Controller
         return view('users.show', [
             'user' => $user,
             'microposts' => $microposts,
-            'favorites' => $favorites,
+            // 'micropost' => $favorites,
             // 'timeline' => $timeline,
             
         ]);
