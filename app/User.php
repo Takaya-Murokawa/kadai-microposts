@@ -206,12 +206,15 @@ class User extends Authenticatable
      
     public function timeline()
     {
-        // このユーザがファボしたユーザのfavoidを取得して配列にする
-        $micropostIds = $this->favorites()->pluck('microposts.id')->toArray();
-        // このユーザのidもその配列に追加
-        $micropostIds[] = $this->id;
+        
+        // このユーザがファボしたユーザのfavoidを取得して配列にする ファボツイートを所持
+        $micropostIds_favorite = $this->favorites()->pluck('favorites.micropost_id')->toArray();
+        // このユーザのidもその配列に追加 ユーザーのid
+        $micropostIds_myself = $this->microposts()->pluck('microposts.id')->toArray();
+        //配列結合
+         $micropostIds = array_merge($micropostIds_favorite,$micropostIds_myself);
         // それらのユーザが所有する投稿に絞り込む
-        return Micropost::whereIn('user_id', $micropostIds);
+        return Micropost::whereIn('id', $micropostIds);
     }
      
     

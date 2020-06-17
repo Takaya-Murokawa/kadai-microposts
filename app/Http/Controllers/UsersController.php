@@ -35,7 +35,7 @@ class UsersController extends Controller
         // ユーザの投稿一覧を作成日時の降順で取得
         $microposts = $user->timeline()->orderBy('created_at', 'desc')->paginate(10);
         // orderBy('created_at', 'desc')
-        
+       
         // $favorites = $user->favorites()->paginate(10);
         // $microposts = array_merge_recursive($microposts,$favorites);
         
@@ -128,7 +128,7 @@ class UsersController extends Controller
         // ファボ一覧ビューでそれらを表示
         return view('users.favorites', [
             'user' => $user,
-            'micropost' => $microposts,
+            // 'micropost' => $microposts,
             'microposts' => $favorite,
         ]);
     }
