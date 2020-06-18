@@ -117,13 +117,13 @@ class UsersController extends Controller
     public function favorites($id){
         $user = User::findOrFail($id);//自分のユーザIdかも？
         
-        $microposts = User::findOrFail($id);//一覧所得なのでUserでおk
+        // $microposts = User::findOrFail($id);//一覧所得なのでUserでおk
          
          // 関係するモデルの件数をロード
-        $microposts->loadRelationshipCounts();
+        $user->loadRelationshipCounts();
         
         // ユーザのファボー一覧を取得
-        $favorite = $microposts->favorites()->orderBy('created_at', 'desc')->paginate(10);
+        $favorite = $user->favorites()->orderBy('created_at', 'desc')->paginate(10);
         
         // ファボ一覧ビューでそれらを表示
         return view('users.favorites', [

@@ -10,4 +10,10 @@
             {!! Form::submit('Follow', ['class' => "btn btn-primary btn-block"]) !!}
         {!! Form::close() !!}
     @endif
+
+   
+   
+            <!--{!! Form::submit('My profile', ['class' => "btn btn-primary btn-block"]) !!}-->
+  
+    
 @endif

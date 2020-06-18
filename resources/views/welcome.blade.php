@@ -6,6 +6,18 @@
        <div class="row">
             <aside class="col-sm-4">
                 @include('users.card')
+                
+                @if (Auth::id() == $user->id)
+                    {{--Myprofileリンクボタン--}}
+                    
+                    <a type="button" href="{{ route('users.show', ['user' =>  Auth::id()]) }}" class=" btn btn-info col-sm-12">
+                        My profile
+                    </a>
+                    
+                    <!--<button type="button" class="btn btn-info col-sm-12">-->
+                        <!--{!! link_to_route('users.show', 'profile', ['user' =>  Auth::id()]) !!}-->
+                    <!--</button>-->
+                @endif
             <!--    <div class="card">-->
             <!--        <div class="card-header">-->
             <!--            <h3 class="card-title">{{ Auth::user()->name }}</h3>-->

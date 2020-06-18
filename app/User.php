@@ -212,7 +212,7 @@ class User extends Authenticatable
         // このユーザのidもその配列に追加 ユーザーのid
         $micropostIds_myself = $this->microposts()->pluck('microposts.id')->toArray();
         //配列結合
-         $micropostIds = array_merge($micropostIds_favorite,$micropostIds_myself);
+        $micropostIds = array_merge($micropostIds_favorite,$micropostIds_myself);
         // それらのユーザが所有する投稿に絞り込む
         return Micropost::whereIn('id', $micropostIds);
     }
