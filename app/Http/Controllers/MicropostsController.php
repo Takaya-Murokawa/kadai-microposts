@@ -43,6 +43,41 @@ class MicropostsController extends Controller
         return back();
     }
     
+    
+    public function edit($id){
+        
+        $microposts = \App\Micropost::findOrFail($id);
+        
+        return view('microposts.edit', [
+            'microposts' => $microposts,
+            // 'microposts' => $microposts,
+            // 'micropost' => $favorites,
+            // 'timeline' => $timeline,
+            
+        ]);
+    }
+    
+
+// putまたはpatchでmessages/idにアクセスされた場合の「更新処理」
+    public function update(Request $request, $id)
+    {
+        // $this->validate($request, [
+        //     'profile' => 'required|max:100',   // 追加
+        // ]);
+
+        // idの値でprofileを検索して取得
+        $microposts = \App\Micropost::findOrFail($id);
+        // profileを更新
+        $microposts->content = $request->content;
+        // $users->profile = $request->profile;
+        $microposts->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
+    }
+    
+   
+    
      public function destroy($id)
     {
         // idの値で投稿を検索して取得

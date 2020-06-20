@@ -14,7 +14,7 @@
                         <font size="4">
                             {!! link_to_route('users.show', $micropost->user->name, ['user' => $micropost->user->id]) !!}
                         </font>
-                        <span class="text-muted"><font size="1.5">{{ $micropost->created_at}}</font>@include('tweet_dropdown.tweet_dropdown')</span>
+                        <span class="text-muted"><font size="1.5">{{ $micropost->created_at}}</font></span>
                          
                     <div>
                         {{-- 投稿内容 --}}
@@ -22,18 +22,20 @@
                     </div>
                     
                     <!--<div class="d-flex flex-row justify-content-start　padding-right" style="15px" >-->
-                    <div class="d-flex flex-row justify-content-start">
+                    <div class="d-flex flex-row justify-content-sm-start">
                         {{-- ファボ／アンファボボタン --}}
                         @include('favorite.favorite_button')
                         
-                        <!--@if (Auth::id() == $micropost->user_id)-->
-                        <!--    {{-- 投稿削除ボタンのフォーム --}}-->
-                        <!--    {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}-->
-                        <!--        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm justify-content-around	']) !!}-->
-                        <!--    {!! Form::close() !!}-->
-                        <!--@endif-->
                         
-                        
+                        @if (Auth::id() == $micropost->user_id)
+                            {{-- 投稿削除ボタンのフォーム --}}
+                            {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm ']) !!}
+                            {!! Form::close() !!}
+                            
+                            {!! link_to_route('microposts.edit', 'edit', ['micropost' => $micropost->id], ['class' => 'btn btn-sm btn-secondary ']) !!}
+                            
+                        @endif
                         
                     </div>
                     

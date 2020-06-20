@@ -6,6 +6,7 @@
         {{-- ユーザのメールアドレスをもとにGravatarを取得して表示 --}}
         <img class="rounded-circle img-fluid" src="{{ Gravatar::get($user->email, ['size' => 500]) }}" alt="">
     </div>
+    
 </div>
 
 

@@ -29,6 +29,11 @@
                     {!! Form::label('password_confirmation', 'Confirmation') !!}
                     {!! Form::password('password_confirmation', ['class' => 'form-control','placeholder'=>'パスワード確認']) !!}
                 </div>
+                
+                <div class="form-group">
+                    {!! Form::label('profile', 'Profile') !!}
+                    {!! Form::password('profile', ['class' => 'form-control','placeholder'=>'紹介文']) !!}
+                </div>
 
                 {!! Form::submit('Sign up', ['class' => 'btn btn-primary btn-block']) !!}
             {!! Form::close() !!}

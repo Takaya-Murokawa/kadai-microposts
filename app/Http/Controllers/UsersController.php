@@ -61,10 +61,56 @@ class UsersController extends Controller
             // 'timeline' => $timeline,
             
         ]);
-        
     }
     
+    //  public function store(Request $request)
+    // {
+    //   $this->validate($request, [
+    //         'profile' => 'required|max:100',   // 追加
+    //     ]);
+
+    //     // idの値でprofileを検索して取得
+    //     $users = User::findOrFail($id);
+    //     // profileを更新
+    //     $users = new User;
+    //     $users->profile = $request->profile;
+    //     $users->save();
+
+    //     // トップページへリダイレクトさせる
+    //     return redirect('/');
+    // }
     
+    
+    public function edit($id){
+        $user = User::findOrFail($id);
+        
+        return view('users.edit', [
+            'user' => $user,
+            // 'microposts' => $microposts,
+            // 'micropost' => $favorites,
+            // 'timeline' => $timeline,
+            
+        ]);
+    }
+    
+
+// putまたはpatchでmessages/idにアクセスされた場合の「更新処理」
+    public function update(Request $request, $id)
+    {
+        // $this->validate($request, [
+        //     'profile' => 'required|max:100',   // 追加
+        // ]);
+
+        // idの値でprofileを検索して取得
+        $users = User::findOrFail($id);
+        // profileを更新
+        $users->name = $request->name;
+        // $users->profile = $request->profile;
+        $users->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
+    }
     
     /**
      * ユーザのフォロー一覧ページを表示するアクション。
