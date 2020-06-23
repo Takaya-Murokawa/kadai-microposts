@@ -22,10 +22,9 @@
                     </div>
                     
                     <!--<div class="d-flex flex-row justify-content-start　padding-right" style="15px" >-->
-                    <div class="d-flex flex-row justify-content-sm-start">
+                    <div class="d-flex flex-row justify-content-start">
                         {{-- ファボ／アンファボボタン --}}
                         @include('favorite.favorite_button')
-                        
                         
                         @if (Auth::id() == $micropost->user_id)
                             {{-- 投稿削除ボタンのフォーム --}}
@@ -33,7 +32,7 @@
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm ']) !!}
                             {!! Form::close() !!}
                             
-                            {!! link_to_route('microposts.edit', 'edit', ['micropost' => $micropost->id], ['class' => 'btn btn-sm btn-secondary ']) !!}
+                            {!! link_to_route('microposts.edit', 'edit', ['micropost' => $micropost->id], ['class' => 'btn btn-sm btn-secondary justify-content-between']) !!}
                             
                         @endif
                         

@@ -97,9 +97,9 @@ class UsersController extends Controller
 // putまたはpatchでmessages/idにアクセスされた場合の「更新処理」
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'profile' => 'required|max:100',   // 追加
-        // ]);
+        $this->validate($request, [
+            'name' => 'required|max:15',   // 追加
+        ]);
 
         // idの値でprofileを検索して取得
         $users = User::findOrFail($id);

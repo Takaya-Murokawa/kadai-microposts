@@ -8,8 +8,13 @@
     </div>
     
 </div>
+<!--@if (Auth::id() == $user->id)-->
+<!--                {{--プロフィール編集ページへのリンク --}}-->
+<!--                {!! link_to_route('users.edit', 'プロフィールを編集', ['user' => $user->id], ['class' => 'btn btn-info col-sm-12']) !!}-->
+<!--@else-->
 
 
+    {{-- フォロー／アンフォローボタン --}}
+    @include('user_follow.follow_button')
 
-{{-- フォロー／アンフォローボタン --}}
-@include('user_follow.follow_button')
+<!--@endif-->
