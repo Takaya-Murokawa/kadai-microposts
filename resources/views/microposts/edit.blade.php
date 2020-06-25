@@ -7,7 +7,7 @@
 
             <div class="form-group">
                 {!! Form::label('content', '投稿編集:') !!}
-                {!! Form::text('content', null, ['class' => 'form-control']) !!}
+                {!! Form::textarea('content', null, ['class' => 'form-control','rows' => '2']) !!}
             </div>
             
             <!--<div class="form-group">-->
@@ -15,7 +15,7 @@
             <!--    {!! Form::text('profile', null, ['class' => 'form-control']) !!}-->
             <!--</div>-->
 
-            {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('更新', ['class' => 'btn btn-primary  btn-block']) !!}
 
         {!! Form::close() !!}
     </div>
